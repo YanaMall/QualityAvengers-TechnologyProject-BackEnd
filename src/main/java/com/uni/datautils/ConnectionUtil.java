@@ -27,9 +27,9 @@ public class ConnectionUtil {
             } else {
                 //example connection string jdbc:postgresql://localhost:5432/postgres?user=postgres&password=password
                 Connection conn = DriverManager.getConnection(
-                            System.getenv("DB_URL"),
-                            System.getenv("DB_USER"),
-                            System.getenv("DB_PASS")
+                            System.getenv("URL"),
+                            System.getenv("username"),
+                            System.getenv("password")
                 );
 
                 return conn;

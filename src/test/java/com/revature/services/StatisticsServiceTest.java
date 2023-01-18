@@ -29,8 +29,8 @@ public class StatisticsServiceTest {
 
     @InjectMocks
     private StatisticsServiceImpl statisticsServiceImpl = new StatisticsServiceImpl(statBasketballDAOMock, userDAOMock);
-
-    private List<ImUser> mockImUser = Stream.of(
+    // Mock ImUser data
+    private final List<ImUser> mockImUser = Stream.of(
             new ImUser(1, "user1", "1234", "player", 72, 165, "https://robohash.org/nequeestaccusantium.png", false),
             new ImUser(2, "user2", "1234", "player", 70, 160, "https://robohash.org/nequeestaccusantium.png", false),
             new ImUser(3, "user3", "1234", "player", 75, 170, "https://robohash.org/nequeestaccusantium.png", true),
@@ -38,7 +38,9 @@ public class StatisticsServiceTest {
             new ImUser(5, "user5", "1234", "player", 80, 180, "https://robohash.org/nequeestaccusantium.png", true)
 
     ).collect(Collectors.toList());
-    private List<StatBasketball> mockStatBasketballs = Stream.of(
+
+    // Mocked StatBasketball data
+    private final List<StatBasketball> mockStatBasketballs = Stream.of(
             new StatBasketball(101,1,501, "Warriors",55,12,5,3),
             new StatBasketball(102,2,502, "Challengers",50,17,7,5),
             new StatBasketball(103,3,503, "Rockers",67,10,2,2),

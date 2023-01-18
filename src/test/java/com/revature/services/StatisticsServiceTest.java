@@ -29,7 +29,8 @@ public class StatisticsServiceTest {
 
     @InjectMocks
     private StatisticsServiceImpl statisticsServiceImpl = new StatisticsServiceImpl(statBasketballDAOMock, userDAOMock);
-    // Mock ImUser data
+
+    // Mocked ImUser data
     private final List<ImUser> mockImUser = Stream.of(
             new ImUser(1, "user1", "1234", "player", 72, 165, "https://robohash.org/nequeestaccusantium.png", false),
             new ImUser(2, "user2", "1234", "player", 70, 160, "https://robohash.org/nequeestaccusantium.png", false),

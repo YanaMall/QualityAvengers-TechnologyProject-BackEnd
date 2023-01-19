@@ -12,6 +12,7 @@ import java.util.Properties;
 
 public class ConnectionUtil {
 
+
     public static Connection getConnection() {
         try {
             InputStream input = ConnectionUtil.class.getClassLoader().getResourceAsStream("database.properties");
@@ -21,7 +22,7 @@ public class ConnectionUtil {
 
             // If running tests, use H2 in-memory database, otherwise, use Postgres database
             if (testMode.equals("true")) {
-                Connection conn = DriverManager.getConnection("jdbc:h2:mem:test");
+                Connection conn = DriverManager.getConnection("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1");
 
                 return conn;
             } else {

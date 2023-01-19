@@ -70,24 +70,33 @@ public class StatisticsServiceTest {
         verify(statBasketballDAOMock,times(1)).findAllByGameId(502);
         assertEquals(5, sbb.size());   // Asserting all the details related to gameId=502 is true
     }
-    @DisplayName("Add or update Basketball Statistics")
+    @DisplayName("Update Basketball Statistics")
     @Test
-    public void addOrUpdateBasketballStat(){
+    public void UpdateBasketballStat(){
 
         StatBasketball statChange = new StatBasketball(101,1,501, "Warriors",65,12,5,5);
 
-        lenient().when(statBasketballDAOMock.findAll()).thenReturn(mockStatBasketballs); // if statBasketballDAOMock finds all then return all mocking data
+        when(statBasketballDAOMock.findAll()).thenReturn(mockStatBasketballs);
 
-        if(statBasketballDAOMock.findAllByGameId(501).equals(statChange.getGameId())) {  // if exists, update with new changes
-            StatBasketball updateStat = statisticsServiceImpl.addOrUpdateBasketballStat(statChange);
-            statBasketballDAOMock.update(updateStat);
-            verify(statBasketballDAOMock).update(updateStat);
-            assertEquals(65, updateStat.getPoints());
-            assertEquals(5, updateStat.getFouls());
-        }else{
-            statBasketballDAOMock.save(statChange);     // if not match, create new one and save
-            verify(statBasketballDAOMock).save(statChange);
-        }
+        StatBasketball updateStat = statisticsServiceImpl.addOrUpdateBasketballStat(statChange);
+        statBasketballDAOMock.update(updateStat);
+        verify(statBasketballDAOMock, times(2)).update(updateStat);
+        assertEquals(65, updateStat.getPoints());
+        assertEquals(5, updateStat.getFouls());
+    }
+    @DisplayName("Add Basketball Statistics")
+    @Test
+    public void addBasketballStat(){
+
+        StatBasketball statChange = new StatBasketball(106,6,506, "Gladiators",82,10,6,10);
+
+        when(statBasketballDAOMock.findAll()).thenReturn(mockStatBasketballs);
+
+        StatBasketball addStat = statisticsServiceImpl.addOrUpdateBasketballStat(statChange);
+
+        statBasketballDAOMock.save(addStat);     // Create new one and save
+
+        verify(statBasketballDAOMock).save(addStat);
     }
 }
 

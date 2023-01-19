@@ -73,13 +73,15 @@ public class StatisticsServiceTest {
     @DisplayName("Update Basketball Statistics")
     @Test
     public void UpdateBasketballStat(){
-
+        //Update new changes in the existing data
         StatBasketball statChange = new StatBasketball(101,1,501, "Warriors",65,12,5,5);
 
         when(statBasketballDAOMock.findAll()).thenReturn(mockStatBasketballs);
 
         StatBasketball updateStat = statisticsServiceImpl.addOrUpdateBasketballStat(statChange);
+
         statBasketballDAOMock.update(updateStat);
+
         verify(statBasketballDAOMock, times(2)).update(updateStat);
         assertEquals(65, updateStat.getPoints());
         assertEquals(5, updateStat.getFouls());
@@ -96,7 +98,7 @@ public class StatisticsServiceTest {
 
         statBasketballDAOMock.save(addStat);     // Create new one and save
 
-        verify(statBasketballDAOMock).save(addStat);
+        verify(statBasketballDAOMock, times(1)).save(addStat);
     }
 }
 

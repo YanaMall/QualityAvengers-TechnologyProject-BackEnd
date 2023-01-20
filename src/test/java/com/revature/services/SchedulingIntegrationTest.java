@@ -1,4 +1,4 @@
-package dev.tran.integrationtest;
+package com.revature.services;
 
 import com.uni.daos.GameDAO;
 import com.uni.daos.SeasonDAO;

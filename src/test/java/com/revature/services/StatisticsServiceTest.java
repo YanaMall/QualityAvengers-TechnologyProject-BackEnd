@@ -50,52 +50,63 @@ public class StatisticsServiceTest {
     @DisplayName("Get players card by userId")
     @Test
     public void getPlayerCardByUserId(){
-        when(userDAOMock.findById(3)).thenReturn(mockImUser.get(2)); //If userDAOMock finds id=3, then return mockImUser userid = 3 which is get(2)
-        when(statBasketballDAOMock.findAll()).thenReturn(mockStatBasketballs); // if statBasketballDAOMock finds all then return all mocking data
-        PlayerCard pc = statisticsServiceImpl.getPlayerCardByUserId(3);
-        assertEquals(pc.getUsername(), "user3");
-        assertEquals(pc.getHeightInches(), 75);
-        assertEquals(pc.getWeightLbs(), 170);
-        assertEquals(pc.getProfilePic(), "url3");
-        assertTrue(pc.isHideBiometrics());
+        //I userId =3, then return mockdata 3(get(2) means 3rd data)
+        when(userDAOMock.findById(3)).thenReturn(mockImUser.get(2));
+
+        // if statBasketballDAOMock finds all then return all mocking data
+        when(statBasketballDAOMock.findAll()).thenReturn(mockStatBasketballs);
+
+        PlayerCard PC3 = statisticsServiceImpl.getPlayerCardByUserId(3);
+
+        assertEquals(PC3.getUsername(), "user3");
+        assertEquals(PC3.getHeightInches(), 75);
+        assertEquals(PC3.getWeightLbs(), 170);
+        assertEquals(PC3.getProfilePic(), "url3");
+        assertTrue(PC3.isHideBiometrics());
     }
 
     @DisplayName("Get all Basketball Statistics by game id")
     @Test
     public void getAllBasketballStatsByGameId(){
+        //Find gameId then return Mock bascketball data
         when(statBasketballDAOMock.findAllByGameId(502)).thenReturn(mockStatBasketballs);
 
         List<StatBasketball> sbb = statisticsServiceImpl.getAllBasketballStatsByGameId(502);
+
         // Verifying number of invocations
         verify(statBasketballDAOMock,times(1)).findAllByGameId(502);
+
         assertEquals(5, sbb.size());   // Asserting all the details related to gameId=502 is true
     }
     @DisplayName("Update Basketball Statistics")
     @Test
     public void UpdateBasketballStat(){
-        //Update new changes in the existing data
+        //Existing data with new changes
         StatBasketball statChange = new StatBasketball(101,1,501, "Warriors",65,12,5,5);
 
         when(statBasketballDAOMock.findAll()).thenReturn(mockStatBasketballs);
 
         StatBasketball updateStat = statisticsServiceImpl.addOrUpdateBasketballStat(statChange);
 
+        // New changes updating
         statBasketballDAOMock.update(updateStat);
 
+        // Verifying new changes by number of invocations
         verify(statBasketballDAOMock, times(2)).update(updateStat);
-        assertEquals(65, updateStat.getPoints());
+        assertEquals(65, updateStat.getPoints()); // Asserting new changes
         assertEquals(5, updateStat.getFouls());
     }
     @DisplayName("Add Basketball Statistics")
     @Test
     public void addBasketballStat(){
-
+        // New data not existing
         StatBasketball statChange = new StatBasketball(106,6,506, "Gladiators",82,10,6,10);
 
         when(statBasketballDAOMock.findAll()).thenReturn(mockStatBasketballs);
 
         StatBasketball addStat = statisticsServiceImpl.addOrUpdateBasketballStat(statChange);
 
+        // Saving new data
         statBasketballDAOMock.save(addStat);     // Create new one and save
 
         verify(statBasketballDAOMock, times(1)).save(addStat);

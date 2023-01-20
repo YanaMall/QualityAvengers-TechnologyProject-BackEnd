@@ -63,7 +63,6 @@ public class SchedulingServiceTest {
         when(venueDAOMock.findAll()).thenReturn(mockVenues);
         List<Venue> actual = schedulingService.getAllVenues();
         assertEquals(mockVenues.size(), actual.size());
-
     }
 
     @DisplayName("Get all Games")

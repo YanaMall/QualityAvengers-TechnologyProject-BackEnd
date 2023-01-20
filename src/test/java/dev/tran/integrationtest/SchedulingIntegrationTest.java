@@ -34,13 +34,13 @@ public class SchedulingIntegrationTest {
     @BeforeEach
     public void populateDatabase() throws SQLException {
         try (Connection conn = ConnectionUtil.getConnection()) {
-            ConnectionUtil.;
+            ConnectionUtil.populateH2Database(conn);
         }
     }
     @AfterEach
     public void clearDatabase() throws SQLException {
         try (Connection conn = ConnectionUtil.getConnection()) {
-
+            ConnectionUtil.clearH2Database(conn);
         }
     }
 

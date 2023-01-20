@@ -6,7 +6,6 @@ import com.uni.daos.VenueDAO;
 import com.uni.entities.Game;
 import com.uni.entities.Season;
 import com.uni.entities.Venue;
-import com.uni.services.SchedulingService;
 import com.uni.services.SchedulingServiceImpl;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -37,7 +36,8 @@ public class SchedulingServiceTest {
     @Mock
     private SeasonDAO seasonDAOMock;
     @InjectMocks
-    private SchedulingService schedulingService = new SchedulingServiceImpl(venueDAOMock,gameDAOMock,seasonDAOMock);
+    private SchedulingServiceImpl schedulingService;
+            //= new SchedulingServiceImpl(venueDAOMock,gameDAOMock,seasonDAOMock);
 
     private List<Venue> mockVenues = Stream.of(
             new Venue("Stade"),

@@ -211,7 +211,7 @@ public class RegistrationServiceIntegrationTest
     @Test
     public void denyRequest()
     {
-        TeamRequest tr = new TeamRequest(1, "The Ballers", 4, "pending");
+        TeamRequest tr = new TeamRequest(1, "The Ballers", 4, "pending"); 
         TeamRequest realTR = registrationService.denyRequest(tr.getTeamRequestId());
         assertEquals("denied", realTR.getTeamRequestStatus());
     }

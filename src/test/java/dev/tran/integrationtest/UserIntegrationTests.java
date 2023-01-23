@@ -76,5 +76,4 @@ public class UserIntegrationTests {
             Assertions.assertEquals(expectedResponseJson, actualResponseJson);
         });
     }
-
 }

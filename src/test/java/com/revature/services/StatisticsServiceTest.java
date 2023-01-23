@@ -50,14 +50,14 @@ public class StatisticsServiceTest {
     @DisplayName("Get players card by userId")
     @Test
     public void getPlayerCardByUserId(){
-        //I userId =3, then return mockdata 3(get(2) means 3rd data)
+        //I userId =3, then return mockdata
         when(userDAOMock.findById(3)).thenReturn(mockImUser.get(2));
 
         // if statBasketballDAOMock finds all then return all mocking data
         when(statBasketballDAOMock.findAll()).thenReturn(mockStatBasketballs);
 
         PlayerCard PC3 = statisticsServiceImpl.getPlayerCardByUserId(3);
-
+        verify(userDAOMock, times(1)).findById(3);
         assertEquals(PC3.getUsername(), "user3");
         assertEquals(PC3.getHeightInches(), 75);
         assertEquals(PC3.getWeightLbs(), 170);
@@ -82,7 +82,16 @@ public class StatisticsServiceTest {
     @Test
     public void UpdateBasketballStat(){
         //Existing data with new changes
-        StatBasketball statChange = new StatBasketball(101,1,501, "Warriors",65,12,5,5);
+        StatBasketball statChange = new StatBasketball(
+                101,
+                1,
+                501,
+                "Warriors",
+                65,
+                12,
+                5,
+                5
+        );
 
         when(statBasketballDAOMock.findAll()).thenReturn(mockStatBasketballs);
 
@@ -99,15 +108,24 @@ public class StatisticsServiceTest {
     @DisplayName("Add Basketball Statistics")
     @Test
     public void addBasketballStat(){
-        // New data not existing
-        StatBasketball statChange = new StatBasketball(106,6,506, "Gladiators",82,10,6,10);
+        // New data
+        StatBasketball statChange = new StatBasketball(
+                106,
+                6,
+                506,
+                "Gladiators",
+                82,
+                10,
+                6,
+                10
+        );
 
         when(statBasketballDAOMock.findAll()).thenReturn(mockStatBasketballs);
 
         StatBasketball addStat = statisticsServiceImpl.addOrUpdateBasketballStat(statChange);
 
         // Saving new data
-        statBasketballDAOMock.save(addStat);     // Create new one and save
+        statBasketballDAOMock.save(addStat);
 
         verify(statBasketballDAOMock, times(1)).save(addStat);
     }

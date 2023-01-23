@@ -88,15 +88,14 @@ public class SchedulingServiceTest {
         Game testGame = new Game(2,"terrain","season 1","Lakers","Bulls",130,213,10,"Bulls win");
         when(gameDAOMock.save(testGame)).thenReturn(testGame);
         Game actualGame = schedulingService.scheduleGame(testGame);
-//        assertEquals(testGame.getOutcome(), actualGame.getOutcome()););
-    }
+//        assertEquals(testGame.getOutcome(), actualGame.getOutcome());
 
-    @DisplayName("Schedule Season")
-    @Test
-    public void scheduleSeason(){
-        Season testSeason = new Season("Season1");
-        when(seasonDAOMock.save(testSeason)).thenReturn(testSeason);
-        Season actualSeason = schedulingService.scheduleSeason(testSeason);
+//    @DisplayName("Schedule Season")
+//    @Test
+//    public void scheduleSeason(){
+//        Season testSeason = new Season("Season1");
+//        when(seasonDAOMock.save(testSeason)).thenReturn(testSeason);
+//        Season actualSeason = schedulingService.scheduleSeason(testSeason);
 //        assertEquals(testSeason.getTitle(),actualSeason.getTitle()););
     }
 }

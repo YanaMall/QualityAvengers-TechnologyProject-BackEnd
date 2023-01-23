@@ -66,6 +66,7 @@ public class StatisticsServiceIntegrationTest {
         List<StatBasketball> sbb = statBasketballDAO.findAllByGameId(501);
 
         //Then
+        sbb.forEach(s -> assertEquals(s.getUserId(), 1));
         assertEquals(sbb.get(0).getTeamName(),"Warriors");
     }
     @DisplayName("Update Basketball Statistics")
@@ -121,7 +122,6 @@ public class StatisticsServiceIntegrationTest {
         //Then
         statBasketballDAO.save(newStat);
         assertEquals(statBasketballDAO.findAll().get(1).getTeamName(), "Gladiators");
-
 
     }
 }

@@ -85,8 +85,8 @@ public class ConnectionUtil {
 
             PreparedStatement ps7 = conn.prepareStatement(insertStatBasketball);
 
-            // Crate statbasketball
-            ps7.setInt(1, 1);
+            // Create statbasketball
+            ps7.setInt(1, 3);
             ps7.setInt(2, 501);
             ps7.setString(3, "Warriors");
             ps7.setInt(4,55);
@@ -231,8 +231,8 @@ public class ConnectionUtil {
             ps1.executeUpdate();
             PreparedStatement ps2 = conn.prepareStatement(insertSeasonSql); // insert season
             ps2.executeUpdate();
-            PreparedStatement ps3 = conn.prepareStatement(createTeamSql); // create team
-            ps3.executeUpdate();
+//            PreparedStatement ps3 = conn.prepareStatement(createTeamSql); // create team
+//            ps3.executeUpdate();
             PreparedStatement ps4 = conn.prepareStatement(insertTeamSql2); // insert team
             ps4.executeUpdate();
             PreparedStatement ps5 = conn.prepareStatement(venuesTableSql); // Create venues table

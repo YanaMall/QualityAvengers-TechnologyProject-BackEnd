@@ -5,6 +5,7 @@ import com.uni.daos.UserDAO;
 import com.uni.datautils.ConnectionUtil;
 import com.uni.dtos.PlayerCard;
 import com.uni.entities.StatBasketball;
+import com.uni.services.StatisticsService;
 import com.uni.services.StatisticsServiceImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,8 +18,10 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class StatisticsServiceIntegrationTest {
-    private StatisticsServiceImpl statisticsService;
+    private StatisticsServiceImpl statisticsServiceImpl;
     private StatBasketballDAO statBasketballDAO;
+
+    private StatisticsService statisticsService;
 
     private UserDAO userDAO;
 
@@ -54,7 +57,7 @@ public class StatisticsServiceIntegrationTest {
     void getPlayerCardByUserId(){
 
         // When//
-        PlayerCard PC = statisticsService.getPlayerCardByUserId(1);
+        PlayerCard PC = statisticsService.getPlayerCardByUserId(3);
 
         //Then
         assertEquals(PC.getBasketballStats().get(0).getTeamName(),"Warriors");
@@ -66,7 +69,7 @@ public class StatisticsServiceIntegrationTest {
         List<StatBasketball> sbb = statBasketballDAO.findAllByGameId(501);
 
         //Then
-        sbb.forEach(s -> assertEquals(s.getUserId(), 1));
+        sbb.forEach(s -> assertEquals(s.getUserId(), 3));
         assertEquals(sbb.get(0).getTeamName(),"Warriors");
     }
     @DisplayName("Update Basketball Statistics")
@@ -74,8 +77,8 @@ public class StatisticsServiceIntegrationTest {
     void UpdateBasketballStat(){
         //Given
         StatBasketball statChange = new StatBasketball(
-                1,
-                1,
+                0,
+                3,
                 501,
                 "Warriors",
                 65,
@@ -93,6 +96,7 @@ public class StatisticsServiceIntegrationTest {
         existing.setPoints(statChange.getPoints());
         existing.setFouls(statChange.getFouls());
         statBasketballDAO.update(existing);
+        statisticsService.addOrUpdateBasketballStat(existing);
         assertEquals(65, existing.getPoints());
         assertEquals(5, existing.getFouls());
     }
@@ -121,6 +125,7 @@ public class StatisticsServiceIntegrationTest {
         assertNotEquals(checking.getStatBasketballId(),106);
         //Then
         statBasketballDAO.save(newStat);
+        statisticsService.addOrUpdateBasketballStat(newStat);
         assertEquals(statBasketballDAO.findAll().get(1).getTeamName(), "Gladiators");
 
     }

@@ -12,7 +12,6 @@ import java.util.Properties;
 
 public class ConnectionUtil {
 
-
     public static Connection getConnection() {
         try {
             InputStream input = ConnectionUtil.class.getClassLoader().getResourceAsStream("database.properties");
@@ -86,7 +85,7 @@ public class ConnectionUtil {
             PreparedStatement ps7 = conn.prepareStatement(insertStatBasketball);
 
             // Create statbasketball
-            ps7.setInt(1, 3);
+            ps7.setInt(1, 1);
             ps7.setInt(2, 501);
             ps7.setString(3, "Warriors");
             ps7.setInt(4,55);
@@ -123,6 +122,16 @@ public class ConnectionUtil {
             ps5.setString(6, null);
             ps5.setBoolean(7, true);
             ps5.executeUpdate();
+
+            PreparedStatement ps8= conn.prepareStatement(insertUserSql); // Create a user
+            ps8.setString(1, "ayianatesting");
+            ps8.setString(2, "54321");
+            ps8.setString(3, "player");
+            ps8.setInt(4, 58);
+            ps8.setInt(5, 270);
+            ps8.setString(6, null);
+            ps8.setBoolean(7, true);
+            ps8.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -231,10 +240,10 @@ public class ConnectionUtil {
             ps1.executeUpdate();
             PreparedStatement ps2 = conn.prepareStatement(insertSeasonSql); // insert season
             ps2.executeUpdate();
-//            PreparedStatement ps3 = conn.prepareStatement(createTeamSql); // create team
-//            ps3.executeUpdate();
-            PreparedStatement ps4 = conn.prepareStatement(insertTeamSql2); // insert team
-            ps4.executeUpdate();
+            //PreparedStatement ps3 = conn.prepareStatement(createTeamSql); // create team
+            //ps3.executeUpdate();
+            //PreparedStatement ps4 = conn.prepareStatement(insertTeamSql2); // insert team
+            //ps4.executeUpdate();
             PreparedStatement ps5 = conn.prepareStatement(venuesTableSql); // Create venues table
             ps5.executeUpdate();
             PreparedStatement ps6 = conn.prepareStatement(insertVenueSql); // insert venues
@@ -251,8 +260,55 @@ public class ConnectionUtil {
             ps7.setInt(7,1669122000);
             ps7.setString(8,"scheduled");
             ps7.executeUpdate();
+            PreparedStatement insertGame = conn.prepareStatement(insertGameSql); // insert game
+            insertGame.setString(1,"Main Campus Gym: Court 1");
+            insertGame.setString(2,"Fall 2022 Regular Season Basketball");
+            insertGame.setString(3,"The Ballers");
+            insertGame.setString(4, "Grand Dunk Railroad");
+            insertGame.setInt(5,0);
+            insertGame.setInt(6,0);
+            insertGame.setInt(7,1669122000);
+            insertGame.setString(8,"scheduled");
+            insertGame.executeUpdate();
+            PreparedStatement insertGame2 = conn.prepareStatement(insertGameSql); // insert game
+            insertGame2.setString(1,"Main Campus Gym: Court 2");
+            insertGame2.setString(2,"Fall 2022 Regular Season Basketball");
+            insertGame2.setString(3,"Grand Dunk Railroad");
+            insertGame2.setString(4, "The Ballers");
+            insertGame2.setInt(5,0);
+            insertGame2.setInt(6,0);
+            insertGame2.setInt(7,1669122000);
+            insertGame2.setString(8,"scheduled");
+            insertGame2.executeUpdate();
 
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        String gameRequestTbl = "create table game_requests( game_request_id serial primary key, game int references game(game_id), user_id int references im_user(user_id));";
+        String insertGameRequestSQL = "insert into game_requests values(default, 3, 1);";
+        String newInsertSQL = "insert into game_requests values (default, ?, ?)";
+        try
+        {
+            PreparedStatement createTable = conn.prepareStatement(gameRequestTbl);
+            createTable.executeUpdate();
+            PreparedStatement insertGameRequest = conn.prepareStatement(insertGameRequestSQL);
+            insertGameRequest.executeUpdate();
+            PreparedStatement newInsert = conn.prepareStatement(newInsertSQL);
+            newInsert.setInt(1, 2);
+            newInsert.setInt(2, 2);
+            newInsert.executeUpdate();
+            PreparedStatement newInsert2 = conn.prepareStatement(newInsertSQL);
+            newInsert2.setInt(1, 3);
+            newInsert2.setInt(2, 3);
+            newInsert2.executeUpdate();
+            PreparedStatement newInsert3 = conn.prepareStatement(newInsertSQL);
+            newInsert3.setInt(1, 3);
+            newInsert3.setInt(2, 3);
+            newInsert3.executeUpdate();
+        }
+        catch (SQLException e)
+        {
             e.printStackTrace();
         }
     }

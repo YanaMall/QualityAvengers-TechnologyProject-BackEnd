@@ -64,7 +64,7 @@ public class SchedulingIntegrationTest {
 //        //added testGame to the games in DB
 //        gameDAO.save(testGame);
         List<Game> actual = schedulingService.getAllGames();
-        assertEquals(1, actual.size());
+        assertEquals(3, actual.size());
     }
 
     @DisplayName("Integration Get all Seasons")

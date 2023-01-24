@@ -85,7 +85,7 @@ public class ConnectionUtil {
             PreparedStatement ps7 = conn.prepareStatement(insertStatBasketball);
 
             // Create statbasketball
-            ps7.setInt(1, 1);
+            ps7.setInt(1, 3);
             ps7.setInt(2, 501);
             ps7.setString(3, "Warriors");
             ps7.setInt(4,55);

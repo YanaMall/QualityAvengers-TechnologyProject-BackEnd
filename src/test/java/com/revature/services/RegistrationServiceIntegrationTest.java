@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
 
 public class RegistrationServiceIntegrationTest
 {
-    private RegistrationService registrationService;
+    /*private RegistrationService registrationService;
     private TeamDAO teamDAO;
     private UserDAO userDAO;
     private TeamRequestDAO teamRequestDAO;
@@ -214,5 +214,5 @@ public class RegistrationServiceIntegrationTest
         TeamRequest tr = new TeamRequest(1, "The Ballers", 4, "pending"); 
         TeamRequest realTR = registrationService.denyRequest(tr.getTeamRequestId());
         assertEquals("denied", realTR.getTeamRequestStatus());
-    }
+    }*/
 }

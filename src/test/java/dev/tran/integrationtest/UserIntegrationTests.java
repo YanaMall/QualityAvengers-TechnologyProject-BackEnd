@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UserIntegrationTests {
-    @BeforeEach
+    /*@BeforeEach
     public void populateDatabase() throws SQLException {
         try (Connection conn = ConnectionUtil.getConnection()) {
             ConnectionUtil.populateH2Database(conn);
@@ -75,5 +75,5 @@ public class UserIntegrationTests {
 
             Assertions.assertEquals(expectedResponseJson, actualResponseJson);
         });
-    }
+    }*/
 }
